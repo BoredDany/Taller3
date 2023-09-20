@@ -91,7 +91,7 @@ bool ArbolBinarioOrdenado<T>::insertar(T val){
         insertado = true;
         return insertado;
     }else{
-        while (nodo != NULL) {
+        while (nodo != nullptr) {
             padre = nodo;
             if (val < nodo->obtenerDato()){
                 nodo = nodo->obtenerHijoIzq();
@@ -152,7 +152,7 @@ void ArbolBinarioOrdenado<T>::eliminar(T val){
             if(val < nodo->obtenerDato()){
                 nodo = nodo->obtenerHijoIzq();
             }
-            if(val > nodo->obtenerDato()){
+            else if(val > nodo->obtenerDato()){
                 nodo = nodo->obtenerHijoDer();
             }
             if(val == nodo->obtenerDato()){
