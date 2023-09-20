@@ -1,19 +1,24 @@
+
 #include <ctime>
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
 #include <list>
-#include <set>
+#include <queue>
 using namespace std;
 
 // TODO #1: incluir cabeceras implementaciones propias
-#include "arbolBinario.h"
+#include "ArbolBinarioOrdenado.h"
+#include "NodoBinario.h"
 
 // TODO #2: definir tipos de datos para arboles de cadenas de caracteres
 
 // -------------------------------------------------------------------------
 template< class TTree >
 bool ReadTree( TTree& tree, const std::string& filename );
+
+int countLines(std::string archivo);
 
 // -------------------------------------------------------------------------
 int main( int argc, char* argv[] ) {
@@ -25,75 +30,57 @@ int main( int argc, char* argv[] ) {
         cout<<"archivo de entrada "<<argv[1]<<endl;
     }
 
-    // TODO #3: declarar arboles
-    arbolBinario < int > arbolB = arbolBinario <int> ();
-
-    cout<<"valor: "<<arbolB.insertar(6)<< std::endl;
-    cout<<"valor: "<<arbolB.insertar(2)<< std::endl;
-    cout<<"valor: "<<arbolB.insertar(15)<< std::endl;
-    cout<<"valor: "<<arbolB.insertar(1)<< std::endl;
-    cout<<"valor: "<<arbolB.insertar(3)<< std::endl;
-    cout<<"valor: "<<arbolB.insertar(13)<< std::endl;
-    cout<<"valor: "<<arbolB.insertar(30)<< std::endl;
-    cout<<"valor: "<<arbolB.insertar(11)<< std::endl;
-    cout<<"valor: "<<arbolB.insertar(14)<< std::endl;
-
-    arbolB.inOrden();
-
-    cout<<"ELIMINACION"<< std::endl;
-    cout<<"se elimino: "<<arbolB.eliminar(2)<< std::endl;
-    arbolB.inOrden();
-
-    /*
-    // Llenar arbol binario ordenado y obtener tiempo de ejecucion
-    std::clock_t start_arbolBO = std::clock( );
-
-    // TODO #4: llenar arbol desde archivo con funcion ReadTree
-    bool llenar_arbolBO = ReadTree( arbolBO, argv[ 1 ] );
-    std::clock_t end_arbolBO = std::clock( );
-    double tiempo_arbolBO = ( end_arbolBO - start_arbolBO ) / double( CLOCKS_PER_SEC );
-
-    // TODO #5: si se pudo llenar el arbol, imprimir el tiempo
-       if( llenar_arbolBO ){
-           std::cout
-                   << "Tiempo de llenado Arbol Binario Ordenado = "
-                   << tiempo_arbolBO << "seg."
-                   << std::endl;
-       }
-
-       else{
-           std::cout
-                   << "Error al usar \"" << argv[ 1 ]
-                   << "\" para llenar el arbol binario ordenado."
-                   << std::endl;
-       }
-
-    // Obtener recorrido en inorden del arbol binario ordenado
-    // TODO #8: usar funcion del arbol para obtener recorrido en lista
-    // arbolBO.inOrdenLista( inorden_arbolBO );
-*/
-    return( 0 );
-}
-
-// -------------------------------------------------------------------------
-template< class TTree >
-bool ReadTree( TTree& tree, const std::string& filename ) {
-
+    ArbolBinarioOrdenado< std::string > arbolB = ArbolBinarioOrdenado<std::string>();
+    std::string filename = argv[ 1 ];
+    bool i = false;
     std::ifstream input( filename.c_str( ) );
-    if( !input )
-        return( false );
+    if( !input ){
+        std::cout<<"Archivo no leido"<<std::endl;
+    }else{
+        while( !input.eof( ) ) {
 
-    while( !input.eof( ) ) {
-
-        std::string code, value;
-        input >> code >> value;
-        if( code == "add" )
-            tree.insert( value );  // El arbol debe proveer el metodo "insert"
-        else if( code == "del" )
-            tree.erase( value );  // El arbol debe proveer el metodo "erase"
-
+            std::string code, value;
+            input >> code >> value;
+            if( code == "add" ){
+                arbolB.insertar( value );  // El arbol debe proveer el metodo "insert"
+                cout<<value<<endl;
+            }
+            else if( code == "del" ){
+                arbolB.eliminar( value );  // El arbol debe proveer el metodo "erase"
+            }
+        }
     }
 
     input.close( );
-    return( true );
+    cout<<"ARBOL"<<endl;
+    cout<<"RAIZ "<<(arbolB.getRaiz())->obtenerDato()<<endl;
+    arbolB.inOrden();
+
+    /*if (arbolB.getRaiz() == nullptr) {
+        cout<<"RAIZ "<<(arbolB.getRaiz())->obtenerDato()<<endl;;
+    }
+
+    std::queue<NodoBinario<std::string>*> cola;
+    cola.push(arbolB.getRaiz());
+
+    while (!cola.empty()) {
+        NodoBinario<std::string>* padre = cola.front();
+        cola.pop();
+
+        std::cout << "Padre: " << padre->obtenerDato();
+
+        if (padre->obtenerHijoIzq() != nullptr) {
+            std::cout << " - Izquierda: " << (padre->obtenerHijoIzq())->obtenerDato();
+            cola.push(padre->obtenerHijoIzq());
+        }
+
+        if (padre->obtenerHijoDer() != nullptr) {
+            std::cout << " - Derecha: " << (padre->obtenerHijoDer())->obtenerDato();
+            cola.push(padre->obtenerHijoDer());
+        }
+
+        std::cout << std::endl;
+    }*/
+
+    return( 0 );
 }
