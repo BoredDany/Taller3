@@ -1,11 +1,11 @@
 #ifndef TALLER3_NODOBINARIO_H
 #define TALLER3_NODOBINARIO_H
 
-template < clas T >
+template < class T >
 class NodoBinario{
 
 private:
-    T dato
+    T dato;
     NodoBinario<T> *hijoI;
     NodoBinario<T> *hijoD;
 public:
@@ -26,7 +26,7 @@ public:
     void preOrden();
     void nivel();
 
-    bool buscar();
+    bool buscar(T& val);
     bool insert(T& val);
     bool erase(T& val);
 
