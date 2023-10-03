@@ -57,7 +57,10 @@ int main(){
     }
     cout << endl;
 
-    int e = 8 ;
+    int e = 5 ;
     arbolG.erase(e);
+
+    cout<<"PREORDEN" <<endl;
+    arbolG.preorder();
 
 }

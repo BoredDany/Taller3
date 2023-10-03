@@ -134,12 +134,24 @@ bool NodoGeneral<T>::erase(T &datoEliminar, NodoGeneral<T> * raiz) {
         }
         //no hoja
         else{
+            std::cout << "NO ES HOJA" << std::endl;
             this->setHijos(eliminar->hijos);
             this->eraseHijo(eliminar);
         }
     }
 
     return eliminado;
+}
+
+template <class T>
+bool NodoGeneral<T>::eraseHijo(NodoGeneral<T> * eliminar){
+    typename std::list < NodoGeneral<T>* >::iterator it;
+    for(it = this->hijos.begin() ; it != this->hijos.end() ; it++){
+        if(*it == eliminar){
+            this->hijos.erase(it);
+            break;
+        }
+    }
 }
 
 template <class T>

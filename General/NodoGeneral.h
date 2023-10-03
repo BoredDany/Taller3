@@ -35,6 +35,7 @@ public:
     NodoGeneral<T>* searchPadre(T& val);
     bool insert(T& datoNuevo, NodoGeneral<T> * raiz);
     bool erase(T& datoEliminar, NodoGeneral<T> * raiz);
+    bool eraseHijo(NodoGeneral<T> * eliminar);
     bool hoja();
     int tamano();
     T maximo();
