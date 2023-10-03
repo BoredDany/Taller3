@@ -81,7 +81,7 @@ int ArbolGeneral<T>::altura(NodoGeneral<T> *nodo) {
     }else{
         int alth = 0;
         std::list< NodoGeneral<T>* > ::iterator it;
-        for(it = nodo){
+        for(Nodo*: nodo->getHijos()){
 
         }
     }

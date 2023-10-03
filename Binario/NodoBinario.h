@@ -24,13 +24,17 @@ public:
     void inOrden();
     void posOrden();
     void preOrden();
-    void nivel();
+    void niveles();
 
     bool buscar(T& val);
     bool insert(T& val);
     bool erase(T& val);
 
     bool hoja();
+
+    int altura();
+    float minimo();
+    float maximo();
 
 };
 

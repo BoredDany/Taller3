@@ -27,6 +27,10 @@ public:
 
     bool vacio();
 
+    int tamano(NodoBinario<T> * nodo);
+    int altura();
+    float minimo();
+    float maximo();
 };
 
 #include "ArbolBinario.hxx"

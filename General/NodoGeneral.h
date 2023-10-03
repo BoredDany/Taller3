@@ -13,6 +13,7 @@ public:
     NodoGeneral();
     ~NodoGeneral();
     T& getDato();
+    std::list< NodoGeneral<T>* > getHijos();
     void setDato(T& dato);
     void cleanList();
     void insert(T& datoNuevo);

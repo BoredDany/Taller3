@@ -21,6 +21,11 @@ T &NodoGeneral<T>::getDato() {
 }
 
 template <class T>
+std::list< NodoGeneral<T>* > NodoGeneral<T>::getHijos(){
+    return this->hijos;
+}
+
+template <class T>
 void NodoGeneral<T>::setDato(T &dato) {
     this->dato = dato;
 }
