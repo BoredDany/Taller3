@@ -1,4 +1,5 @@
 #include <stack>
+#include <queue>
 
 template < class T >
 ArbolBinario<T>::ArbolBinario(){
@@ -139,10 +140,10 @@ int ArbolBinario<T>::maximo(){
 }
 
 template < class T >
-void ArbolBinario<T>::ruta(T val, std::stack<T>& camino){
+void ArbolBinario<T>::ruta(T val, std::stack<T>& camino,  NodoBinario<T> * nodo){
     if(this->raiz == nullptr){
         return;
     }else{
-        this->raiz->ruta(val, camino);
+        this->raiz->ruta(val, camino, this->raiz);
     }
 }

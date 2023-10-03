@@ -4,6 +4,7 @@
 #define TALLER3_ARBOLBINARIO_H
 
 #include <stack>
+#include <queue>
 
 template < class T >
 class ArbolBinario{
@@ -34,7 +35,7 @@ public:
     int minimo();
     int maximo();
 
-    void ruta(T val, std::stack<T>& camino);
+    void ruta(T val, std::stack<T>& camino,  NodoBinario<T> * nodo);
 };
 
 #include "ArbolBinario.hxx"

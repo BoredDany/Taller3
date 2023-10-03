@@ -1,6 +1,7 @@
 #include "ArbolBinario.h"
 #include <iostream>
 #include <stack>
+#include <queue>
 using namespace std;
 
 int main(){
@@ -39,13 +40,18 @@ int main(){
 
     int a = 5;
     std::stack<int> ruta;
-    arbolB.ruta(a, ruta);
+    std::stack<int> rutaCorrecta;
+    arbolB.ruta(a, ruta, arbolB.getRaiz());
     cout<<"RUTA: " <<endl;
     while(!ruta.empty()){
-        int e = ruta.top();
-        cout << e << "\t";
+        rutaCorrecta.push(ruta.top());
         ruta.pop();
     }
+    while(!rutaCorrecta.empty()){
+        cout << rutaCorrecta.top() << "\t";
+        rutaCorrecta.pop();
+    }
+    cout << endl;
 
     int i = 11;
     arbolB.erase(i);

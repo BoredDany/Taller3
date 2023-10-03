@@ -2,6 +2,8 @@
 #define TALLER3_NODOBINARIO_H
 
 #include <stack>
+#include <queue>
+
 
 template < class T >
 class NodoBinario{
@@ -38,7 +40,7 @@ public:
     int minimo();
     int maximo();
 
-    void ruta(T val, std::stack<T>& camino);
+    bool ruta(T val, std::stack<T>& camino,  NodoBinario<T> * nodo);
 
 };
 

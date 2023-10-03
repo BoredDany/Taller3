@@ -317,30 +317,19 @@ int NodoBinario<T>::maximo(){
 }
 
 template < class T >
-void NodoBinario<T>::ruta(T val, std::stack<T>& camino){
-    NodoBinario<T> * nodo = this;
-    bool encontrado = false;
-    std::stack<T> rutaC;
-    rutaC.push(nodo->dato);
+bool NodoBinario<T>::ruta(T val, std::stack<T>& camino, NodoBinario<T> * nodo){
 
-    while(nodo != nullptr){
-        if(nodo->hijoI != nullptr && val < nodo->hijoI->dato){
-            rutaC.push(nodo->dato);
-            nodo = nodo->hijoI;
-            std::cout<<"dato "<<nodo->dato<<std::endl;
-        }else if(nodo->hijoD != nullptr && val > nodo->hijoD->dato){
-            rutaC.push(nodo->dato);
-            nodo = nodo->hijoD;
-            std::cout<<"dato "<<nodo->dato<<std::endl;
-        }else{
-            encontrado = true;
-            break;
-        }
+    if(nodo == nullptr){
+        return false;
     }
-    if(encontrado){
-        while (!rutaC.empty()){
-            camino.push(rutaC.top());
-            rutaC.pop();
-        }
+    camino.push(nodo->dato);
+    if(nodo->dato == val){
+        return true;
     }
+    if(ruta(val, camino, nodo->hijoI) || ruta(val, camino, nodo->hijoD)){
+        return true;
+    }
+    camino.pop();
+    return false;
+
 }
