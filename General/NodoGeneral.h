@@ -30,10 +30,11 @@ public:
     void cleanList();
 
     //operaciones
-    bool search(T& val);
+    bool buscar(T& val);
     NodoGeneral<T>* searchNodo(T& val);
-    bool insert(T& datoNuevo);
-    bool erase(T& datoEliminar);
+    NodoGeneral<T>* searchPadre(T& val);
+    bool insert(T& datoNuevo, NodoGeneral<T> * raiz);
+    bool erase(T& datoEliminar, NodoGeneral<T> * raiz);
     bool hoja();
     int tamano();
     T maximo();

@@ -16,7 +16,7 @@ int main(){
     }
     arbolG.insert(padre,nuevo);
     padre = 2;
-    nuevo = 3;
+    nuevo = 2;
     arbolG.insert(padre,nuevo);
     arbolG.insertHijos(padre, hijos);
 
@@ -56,5 +56,8 @@ int main(){
         rutaCorrecta.pop();
     }
     cout << endl;
+
+    int e = 8 ;
+    arbolG.erase(e);
 
 }

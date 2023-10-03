@@ -63,9 +63,12 @@ void NodoGeneral<T>::setHijos(std::list< NodoGeneral<T>* > hijos){
 //operaciones
 // ------------------------------------------------
 template <class T>
-bool NodoGeneral<T>::search(T& val){
-    for(NodoGeneral<T>* n : this->hijos){
-        if(n->dato == val){
+bool NodoGeneral<T>::buscar(T& val){
+    if(val == this->dato){
+        return true;
+    }
+    for(NodoGeneral<T> * hijo: this->hijos){
+        if(hijo->buscar(val)){
             return true;
         }
     }
@@ -73,34 +76,30 @@ bool NodoGeneral<T>::search(T& val){
 }
 
 template <class T>
-bool NodoGeneral<T>::insert(T &datoNuevo) {
+NodoGeneral<T>* NodoGeneral<T>::searchPadre(T& val){
+
+    for(NodoGeneral<T> * hijo: this->hijos){
+        if(hijo->dato == val){
+            return this;
+        }
+        NodoGeneral<T> * posiblePadre = hijo->searchPadre(val);
+        if(posiblePadre != nullptr){
+            return posiblePadre;
+        }
+    }
+
+    return nullptr;
+}
+
+template <class T>
+bool NodoGeneral<T>::insert(T &datoNuevo, NodoGeneral<T> * raiz) {
     NodoGeneral<T> *nodo = new NodoGeneral<T>(datoNuevo);
-    if(!this->search(datoNuevo)){
+
+    if(!raiz->buscar(datoNuevo)){
         this->hijos.push_back(nodo);
         return true;
     }
     return false;
-}
-
-template <class T>
-bool NodoGeneral<T>::erase(T &datoEliminar) {
-    /*bool eliminado = false;
-    //buscar nodo a eliminar
-    std::list< NodoGeneral<T> >::iterator it;
-    NodoGeneral<T> *aux;
-    for(it = this->hijos.begin() ; it != this->hijos.end() ; it++){
-        aux = *it;
-        if(aux->getDato() == datoEliminar){
-            break;
-        }
-    }
-    //si se encuentra, se elimina
-    if(it != this->hijos.end()){
-        delete *it;
-        this->hijos.erase(it);
-        eliminado = true;
-    }
-    return eliminado;*/
 }
 
 template <class T>
@@ -115,6 +114,32 @@ NodoGeneral<T>* NodoGeneral<T>::searchNodo(T& val){
         }
     }
     return nullptr;
+}
+
+template <class T>
+bool NodoGeneral<T>::erase(T &datoEliminar, NodoGeneral<T> * raiz) {
+    bool eliminado = false;
+    NodoGeneral<T> * eliminar = raiz;
+
+    eliminar = eliminar->searchNodo(datoEliminar);
+
+    if(this != nullptr){
+        std::cout << "ELIMINAR: " << eliminar->dato << std::endl;
+        std::cout << "PADRE: " << this->dato << std::endl;
+
+        //hoja
+        if(eliminar->hoja()){
+            std::cout << "ES HOJA" << std::endl;
+            this->eraseHijo(eliminar);
+        }
+        //no hoja
+        else{
+            this->setHijos(eliminar->hijos);
+            this->eraseHijo(eliminar);
+        }
+    }
+
+    return eliminado;
 }
 
 template <class T>

@@ -52,12 +52,7 @@ bool ArbolGeneral<T>::insert(T& padreNuevo, T& nodoNuevo) {
     } else{
         NodoGeneral<T> * padre = this->raiz;
         padre = padre->searchNodo(padreNuevo);
-        if(padre != nullptr){
-            return padre->insert(nodoNuevo);
-        }
-        else{
-            return false;
-        }
+        return padre->insert(nodoNuevo, this->raiz);
     }
 }
 
@@ -78,13 +73,19 @@ void ArbolGeneral<T>::insertHijos(T& padreNuevo, std::list < NodoGeneral<T>* > h
 }
 
 template<class T>
-bool ArbolGeneral<T>::erase(T nodoEliminar) {
-
-}
-
-template<class T>
-bool ArbolGeneral<T>::search(T nodoBuscar) {
-
+bool ArbolGeneral<T>::erase(T& nodoEliminar) {
+    if(this->raiz == nullptr){
+        return false;
+    } else{
+        NodoGeneral<T> * padre = this->raiz;
+        padre = padre->searchPadre(nodoEliminar);
+        if(padre != nullptr){
+            return padre->erase(nodoEliminar, this->raiz);
+        }
+        else{
+            return false;
+        }
+    }
 }
 
 template<class T>

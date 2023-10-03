@@ -28,8 +28,7 @@ public:
     bool vacio();
     bool insert(T& padreNuevo, T& nodoNuevo);
     void insertHijos(T& padreNuevo, std::list < NodoGeneral<T>* > hijos);
-    bool erase(T nodoEliminar);
-    bool search(T nodoBuscar);
+    bool erase(T& nodoEliminar);
     int altura();
     int altura(NodoGeneral<T> *nodo);
     int size();
