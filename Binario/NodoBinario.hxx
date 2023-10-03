@@ -1,6 +1,7 @@
 #include "NodoBinario.h"
 #include <iostream>
 #include <queue>
+#include <stack>
 
 template< class T >
 NodoBinario<T>::NodoBinario(){
@@ -286,7 +287,7 @@ int NodoBinario<T>::altura(){
 }
 
 template< class T >
-float NodoBinario<T>::minimo(){
+int NodoBinario<T>::minimo(){
     NodoBinario<T> * nodo = this;
     float min = -1;
     if(nodo->hijoI == nullptr){
@@ -301,7 +302,7 @@ float NodoBinario<T>::minimo(){
 }
 
 template< class T >
-float NodoBinario<T>::maximo(){
+int NodoBinario<T>::maximo(){
     NodoBinario<T> * nodo = this;
     float max = -1;
     if(nodo->hijoD == nullptr){
@@ -313,4 +314,33 @@ float NodoBinario<T>::maximo(){
         max = nodo->dato;
     }
     return max;
+}
+
+template < class T >
+void NodoBinario<T>::ruta(T val, std::stack<T>& camino){
+    NodoBinario<T> * nodo = this;
+    bool encontrado = false;
+    std::stack<T> rutaC;
+    rutaC.push(nodo->dato);
+
+    while(nodo != nullptr){
+        if(nodo->hijoI != nullptr && val < nodo->hijoI->dato){
+            rutaC.push(nodo->dato);
+            nodo = nodo->hijoI;
+            std::cout<<"dato "<<nodo->dato<<std::endl;
+        }else if(nodo->hijoD != nullptr && val > nodo->hijoD->dato){
+            rutaC.push(nodo->dato);
+            nodo = nodo->hijoD;
+            std::cout<<"dato "<<nodo->dato<<std::endl;
+        }else{
+            encontrado = true;
+            break;
+        }
+    }
+    if(encontrado){
+        while (!rutaC.empty()){
+            camino.push(rutaC.top());
+            rutaC.pop();
+        }
+    }
 }

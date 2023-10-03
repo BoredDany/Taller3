@@ -1,6 +1,8 @@
 #ifndef TALLER3_NODOBINARIO_H
 #define TALLER3_NODOBINARIO_H
 
+#include <stack>
+
 template < class T >
 class NodoBinario{
 
@@ -33,8 +35,10 @@ public:
     bool hoja();
 
     int altura();
-    float minimo();
-    float maximo();
+    int minimo();
+    int maximo();
+
+    void ruta(T val, std::stack<T>& camino);
 
 };
 

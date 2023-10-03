@@ -1,12 +1,13 @@
 #include "ArbolBinario.h"
 #include <iostream>
+#include <stack>
 using namespace std;
 
 int main(){
-    ArbolBinario<float> arbolB = *new ArbolBinario<float>();
-    float nums [] = {11,6,2,4,5,12,14,17};
+    ArbolBinario<int> arbolB = *new ArbolBinario<int>();
+    int nums [] = {11,6,2,4,5,12,14,17};
 
-    for(float a: nums){
+    for(int a: nums){
         arbolB.insert(a);
     }
 
@@ -36,7 +37,17 @@ int main(){
     int tamanio = arbolB.tamano(arbolB.getRaiz());
     cout<<"TAMANIO: "<<tamanio<<endl;
 
-    float i = 11;
+    int a = 5;
+    std::stack<int> ruta;
+    arbolB.ruta(a, ruta);
+    cout<<"RUTA: " <<endl;
+    while(!ruta.empty()){
+        int e = ruta.top();
+        cout << e << "\t";
+        ruta.pop();
+    }
+
+    int i = 11;
     arbolB.erase(i);
     arbolB.inOrden();
 

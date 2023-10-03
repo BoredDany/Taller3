@@ -3,6 +3,8 @@
 #ifndef TALLER3_ARBOLBINARIO_H
 #define TALLER3_ARBOLBINARIO_H
 
+#include <stack>
+
 template < class T >
 class ArbolBinario{
 private:
@@ -29,8 +31,10 @@ public:
 
     int tamano(NodoBinario<T> * nodo);
     int altura();
-    float minimo();
-    float maximo();
+    int minimo();
+    int maximo();
+
+    void ruta(T val, std::stack<T>& camino);
 };
 
 #include "ArbolBinario.hxx"

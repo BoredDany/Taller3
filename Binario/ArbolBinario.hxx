@@ -1,3 +1,5 @@
+#include <stack>
+
 template < class T >
 ArbolBinario<T>::ArbolBinario(){
     this->raiz = nullptr;
@@ -119,7 +121,7 @@ int ArbolBinario<T>::altura(){
 }
 
 template < class T >
-float ArbolBinario<T>::minimo(){
+int ArbolBinario<T>::minimo(){
     if(this->vacio()){
         return -1;
     }else{
@@ -128,10 +130,19 @@ float ArbolBinario<T>::minimo(){
 }
 
 template < class T >
-float ArbolBinario<T>::maximo(){
+int ArbolBinario<T>::maximo(){
     if(this->vacio()){
         return -1;
     }else{
         return this->raiz->maximo();
+    }
+}
+
+template < class T >
+void ArbolBinario<T>::ruta(T val, std::stack<T>& camino){
+    if(this->raiz == nullptr){
+        return;
+    }else{
+        this->raiz->ruta(val, camino);
     }
 }
