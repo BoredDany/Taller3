@@ -29,12 +29,10 @@ public:
     bool erase(T& val);
 
     bool vacio();
-
     int tamano(NodoBinario<T> * nodo);
     int altura();
     int minimo();
     int maximo();
-
     void ruta(T val, std::stack<T>& camino,  NodoBinario<T> * nodo);
 };
 

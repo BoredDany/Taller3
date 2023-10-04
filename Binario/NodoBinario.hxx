@@ -331,5 +331,4 @@ bool NodoBinario<T>::ruta(T val, std::stack<T>& camino, NodoBinario<T> * nodo){
     }
     camino.pop();
     return false;
-
 }

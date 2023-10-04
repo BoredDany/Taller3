@@ -33,13 +33,10 @@ public:
     bool buscar(T& val);
     bool insert(T& val);
     bool erase(T& val);
-
     bool hoja();
-
     int altura();
     int minimo();
     int maximo();
-
     bool ruta(T val, std::stack<T>& camino,  NodoBinario<T> * nodo);
 
 };

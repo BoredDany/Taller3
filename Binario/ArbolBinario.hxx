@@ -1,3 +1,4 @@
+#include "ArbolBinario.h"
 #include <stack>
 #include <queue>
 
