@@ -72,10 +72,10 @@ void NodoBinario<T>::inOrden(){
 template< class T >
 void NodoBinario<T>::posOrden(){
     if(this->hijoI != nullptr){
-        this->hijoI->inOrden();
+        this->hijoI->posOrden();
     }
     if(this->hijoD != nullptr){
-        this->hijoD->inOrden();
+        this->hijoD->posOrden();
     }
     std::cout << this->getDato()<<"\t";
 }

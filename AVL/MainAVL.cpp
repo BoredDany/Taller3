@@ -5,6 +5,7 @@
 using namespace std;
 
 int main(){
+
     ArbolAVL<int> arbolAVL = *new ArbolAVL<int>();
     int nums [] = {11,6,2,4,5,12,14,17};
 
@@ -37,6 +38,7 @@ int main(){
 
     int tamanio = arbolAVL.tamano(arbolAVL.getRaiz());
     cout<<"TAMANIO: "<<tamanio<<endl;
+
 /*
     int a = 5;
     std::stack<int> ruta;

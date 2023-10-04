@@ -9,12 +9,14 @@ template< class T >
 NodoAVL<T>::NodoAVL(){
     this->hijoI = nullptr;
     this->hijoD = nullptr;
+    this->alt = -1;
 }
 
 template< class T >
 NodoAVL<T>::NodoAVL(T& val){
     this->hijoI = nullptr;
     this->hijoD = nullptr;
+    this->alt = 0;
     this->dato = val;
 }
 
@@ -50,6 +52,11 @@ NodoAVL<T>* NodoAVL<T>::getHijoD(){
     return this->hijoD;
 }
 
+template< class T >
+int NodoAVL<T>::getAltura(){
+    return this->alt;
+}
+
 //setters
 // ------------------------------------------------
 template< class T >
@@ -74,7 +81,7 @@ void NodoAVL<T>::inOrden(){
     if(this->hijoI != nullptr){
         this->hijoI->inOrden();
     }
-    std::cout << this->getDato()<<"\t";
+    std::cout << this->getDato() << "-" << this->getAltura() <<"\t";
     if(this->hijoD != nullptr){
         this->hijoD->inOrden();
     }
@@ -83,17 +90,17 @@ void NodoAVL<T>::inOrden(){
 template< class T >
 void NodoAVL<T>::posOrden(){
     if(this->hijoI != nullptr){
-        this->hijoI->inOrden();
+        this->hijoI->posOrden();
     }
     if(this->hijoD != nullptr){
-        this->hijoD->inOrden();
+        this->hijoD->posOrden();
     }
-    std::cout << this->getDato()<<"\t";
+    std::cout << this->getDato() << "-" << this->getAltura() <<"\t";
 }
 
 template< class T >
 void NodoAVL<T>::preOrden(){
-    std::cout << this->dato << "\t";
+    std::cout << this->getDato() << "-" << this->getAltura() <<"\t";
     if (this->hijoI != nullptr){
         this->hijoI->preOrden();
     }
@@ -172,8 +179,32 @@ bool NodoAVL<T>::insert(T& val){
             }
             insertado = true;
         }
+        this->updateAlturas();
     }
+
     return insertado;
+}
+
+template< class T >
+void NodoAVL<T>::updateAlturas() {
+    int i = -1;
+    int d = -1;
+    if (this->hijoI == nullptr && this->hijoD == nullptr){
+        this->alt = 0;
+    }
+    if(this->hijoI != nullptr){
+        this->hijoI->updateAlturas();
+        i = this->hijoI->alt;
+    }
+    if(this->hijoD != nullptr){
+        this->hijoD->updateAlturas();
+        d = this->hijoD->alt;
+    }
+    if(i < d){
+        this->alt = d + 1;
+    }else{
+        this->alt = i + 1;
+    }
 }
 
 template< class T >
@@ -198,11 +229,11 @@ bool NodoAVL<T>::erase(T& val){
         }
     }
 
-    std::cout << "\n---------------ELIMINACION---------------" << std::endl ;
-    std::cout << "NODO A BORRAR: " << nodoEliminar->getDato() << std::endl;
-    std::cout << "PADRE NODO A BORRAR: " << padreEliminado->getDato() << std::endl;
-
     if(encontrado){
+
+        std::cout << "\n---------------ELIMINACION---------------" << std::endl ;
+        std::cout << "NODO A BORRAR: " << nodoEliminar->getDato() << std::endl;
+        std::cout << "PADRE NODO A BORRAR: " << padreEliminado->getDato() << std::endl;
 
         //tiene 2 hijos
         if(nodoEliminar->hijoI != nullptr && nodoEliminar->hijoD != nullptr){
@@ -267,6 +298,8 @@ bool NodoAVL<T>::erase(T& val){
         }
         eliminado = true;
         std::cout << "-----------------------------------------" << std::endl;
+
+        this->updateAlturas();
     }
     return eliminado;
 }

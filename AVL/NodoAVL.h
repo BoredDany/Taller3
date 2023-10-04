@@ -10,6 +10,7 @@ private:
     T dato;
     NodoAVL<T> *hijoI;
     NodoAVL<T> *hijoD;
+    int alt;
 public:
     NodoAVL();
     ~NodoAVL();
@@ -18,6 +19,7 @@ public:
     T& getDato();
     NodoAVL<T>* getHijoI();
     NodoAVL<T>* getHijoD();
+    int getAltura();
 
     void setDato(T& val);
     void setHijoI(NodoAVL<T> *hijoI);
@@ -30,6 +32,8 @@ public:
 
     bool buscar(T& val);
     bool insert(T& val);
+    void updateAlturas();
+
     bool erase(T& val);
     bool hoja();
     int altura();
