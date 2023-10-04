@@ -1,7 +1,7 @@
 # Taller3
 
 # Binario
-g++ -std=c++11 -o testA BinarioMain.cpp
+g++ -std=c++11 -o testA MainBinario.cpp
 Árbol binario que almacena dato de tipo template
 - Inserción: No se permiten datos repetidos, menores a la izquierda
 - Eliminación
@@ -13,7 +13,7 @@ g++ -std=c++11 -o testA BinarioMain.cpp
 - Altura del árbol
 
 # General
-g++ -std=c++11 -o testA GeneralMain.cpp
+g++ -std=c++11 -o testA MainGeneral.cpp
 Árbol general que almacena dato de tipo template
 - Inserción: No se permiten datos repetidos, se solicita padre y nuevo dato para insertar
 - Eliminación: Si el nodo a eliminar tiene hijos, éstos son adoptados por su padre
@@ -23,3 +23,7 @@ g++ -std=c++11 -o testA GeneralMain.cpp
 - Máximo del árbol
 - Tamaño del árbol
 - Altura del árbol
+
+# AVL
+g++ -std=c++11 -o testA MainAVL.cpp
+Árbol AVL que almacena dato de tipo template
